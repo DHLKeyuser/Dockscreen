@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DHL 5L — Shipping Dock Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">DHL 5L — Shipping Dock Board</div>
+    <div class="clock" id="clock">--:--:--</div>
+  </header>
+
+  <!-- GLOBAL PANELS -->
+  <section class="top-panel">
+    <h2>Up Next</h2>
+    <ul id="global-next" class="list"></ul>
+  </section>
+
+  <main class="board">
+    <section class="dock" id="dock-10">
+      <h2>Dock 10</h2>
+      <div class="row">
+        <section class="panel now">
+          <h3>Now on dock</h3>
+          <ul id="now-10" class="list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="dock" id="dock-11">
+      <h2>Dock 11</h2>
+      <div class="row">
+        <section class="panel now">
+          <h3>Now on dock</h3>
+          <ul id="now-11" class="list"></ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <section class="top-panel">
+    <h2>Late</h2>
+    <ul id="global-late" class="list"></ul>
+  </section>
+
+  <footer class="footer">
+    <div>Data source: <code>./data.js</code> (polled every 30s)</div>
+    <div id="status">—</div>
+  </footer>
+
+  <!-- Initial seed; will be reloaded by app.js on a timer -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

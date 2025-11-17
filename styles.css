@@ -1,0 +1,178 @@
+:root{
+  /* DHL palette */
+  --dhl-yellow:#ffcc00;
+  --dhl-red:#ffffff;
+
+  /* UI */
+  --bg:#0a0a0a;
+  --panel:#121212;
+  --accent:var(--dhl-yellow);
+  --accent-2:var(--dhl-red);
+  --text:#f7f7f7;
+  --muted:#a7a7a7;
+
+  /* Status */
+  --late:#ff6b6b;
+
+  /* Sizing tuned for big TV (148 cm) */
+  --gap:14px;
+  --radius:14px;
+  --fz-time: clamp(18px, 2.6vw, 28px);
+  --fz-title: clamp(16px, 2.0vw, 28px);
+  --fz-meta: clamp(12px, 1.3vw, 16px);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: radial-gradient(1200px 500px at 20% -10%, #1a1a1a, transparent),
+              radial-gradient(1200px 500px at 80% 110%, #111, transparent),
+              var(--bg);
+  color:var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 20px;
+  border-bottom:4px solid var(--dhl-red);
+  background: linear-gradient(180deg, rgba(255,204,0,0.08), rgba(255,204,0,0));
+  position:sticky; top:0; z-index:10;
+}
+.brand{ font-weight:800; letter-spacing:.5px; color:var(--accent-2) }
+.clock{ font-family: Orbitron, monospace; font-size: clamp(18px, 3vw, 36px) }
+
+/* Global Panels */
+.top-panel{
+  max-width:1500px; margin: var(--gap) auto 0; padding: 8px calc(var(--gap) + 6px);
+}
+.top-panel > h2{
+  margin:0 0 6px 0; font-weight:900; letter-spacing:.5px; color: var(--accent-2);
+}
+.top-panel .list{ list-style:none; margin:0; padding:0 }
+.top-panel .item{
+  display:grid; grid-template-columns: 130px 1fr 120px; gap: var(--gap); align-items:center;
+  padding:10px; margin:8px 0;
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+.top-panel .time{ font-family:Orbitron, monospace; color:var(--accent); letter-spacing:1px; font-size: var(--fz-time) }
+.top-panel .title{ font-weight:900; text-transform:uppercase; font-size: var(--fz-title) }
+.top-panel .docktag{ justify-self:end; font-size: var(--fz-meta); color:var(--muted) }
+
+/* Highlight for items whose scheduled window is NOW but not on dock */
+.top-panel .item.due{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(255,204,0,.35), 0 0 16px rgba(255,204,0,.22) inset;
+}
+
+.board{
+  display:grid; grid-template-columns: 1fr 1fr; gap: var(--gap);
+  padding: var(--gap) calc(var(--gap) + 6px);
+  max-width: 1500px; margin: 0 auto;
+}
+.dock{
+  background: linear-gradient(180deg, rgba(18,18,18,.9), rgba(18,18,18,.65));
+  border:1px solid #222; border-radius: var(--radius); overflow:hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+.dock > h2{
+  margin:0; padding:10px 16px; background:linear-gradient(180deg, #191919, #141414);
+  border-bottom:1px solid #222; font-weight:900; letter-spacing:.5px;
+  display:flex; gap:10px; align-items:center; color:var(--text);
+}
+.dock > h2::before{
+  content:""; width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent);
+}
+
+.row{ display:grid; grid-template-columns:1fr; gap: var(--gap); padding: var(--gap) }
+.panel{ background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding:8px }
+.panel h3{ margin:2px 8px 8px; color:var(--muted); letter-spacing:.5px }
+
+.list{ list-style:none; margin:0; padding:0 }
+.item{
+  display:grid; grid-template-columns: 130px 1fr; gap: var(--gap); align-items:center;
+  padding:10px; margin:8px; border-radius: var(--radius); border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+}
+.time{ font-family:Orbitron, monospace; letter-spacing:1px; color:var(--accent); font-size: var(--fz-time) }
+.title{ font-weight:900; text-transform:uppercase; font-size: var(--fz-title) }
+
+.footer{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:10px 16px; border-top:1px solid #1d2633; color:var(--muted); font-size: var(--fz-meta);
+}
+/* === Size tuning === */
+:root{
+ /* Smaller for GLOBAL "Up Next" & "Late" */
+ --fz-top-time: clamp(16px, 2.1vw, 30px);
+ --fz-top-title: clamp(14px, 1.8vw, 24px);
+
+ /* Bigger for per-dock "Now on dock" */
+ --fz-dock-time: clamp(20px, 2.6vw, 36px);
+ --fz-dock-title: clamp(20px, 2.6vw, 36px);
+}
+
+/* Global panels (Up Next + Late) smaller */
+.top-panel .time  { font-size: var(--fz-top-time) !important; }
+.top-panel .title { font-size: var(--fz-top-title) !important; }
+
+/* Per-dock "Now on dock" bigger */
+.dock .panel.now .time  { font-size: var(--fz-dock-time) !important; }
+.dock .panel.now .title { justify-self:end; font-size: var(--fz-dock-title) !important; }
+
+/* (Optional) a touch more breathing room for big Now rows */
+.dock .panel.now .item { padding: 14px 12px; }
+
+/* ===== Comfort Mode (calmer, airier, TV-friendly) ===== */
+:root{
+ /* more breathing room + softer hierarchy */
+ --gap: 16px;
+ --radius: 16px;
+
+ /* smaller top panels (Up Next & Late) */
+ --fz-top-time:  clamp(13px, 1.6vw, 22px);
+ --fz-top-title: clamp(13px, 1.6vw, 22px);
+
+ /* bigger per-dock "Now on dock" */
+ --fz-dock-time:  clamp(24px, 3.4vw, 50px);
+ --fz-dock-title: clamp(20px, 2.9vw, 40px);
+}
+
+/* soften background + panels */
+body{
+ background: radial-gradient(1200px 500px at 20% -10%, #151515, transparent),
+             radial-gradient(1200px 500px at 80% 110%, #0e0e0e, transparent),
+             var(--bg);
+}
+
+.top-panel .item,
+.dock .item{
+ margin: 12px;
+ padding: 12px 14px;
+ border-radius: var(--radius);
+ border: 1px solid rgba(255,255,255,.10);
+ background: rgba(255,255,255,.02);
+}
+
+/* subtle glass if supported (looks great on TVs) */
+@supports (backdrop-filter: blur(4px)) {
+ .top-panel .item,
+ .dock .item{
+   background: rgba(255,255,255,.04);
+   backdrop-filter: blur(4px);
+ }
+}
+
+/* space around sections */
+.top-panel{ margin: 12px auto 0; padding: 8px calc(var(--gap) + 6px); }
+.board{ gap: 24px; }
+
+/* font sizing adjustments */
+.top-panel .time  { font-size: var(--fz-top-time)  !important; }
+.top-panel .title { font-size: var(--fz-top-title) !important; }
+
+.dock .panel.now .time  { font-size: var(--fz-dock-time)  !important; }
+.dock .panel.now .title { font-size: var(--fz-dock-title) !important; }
